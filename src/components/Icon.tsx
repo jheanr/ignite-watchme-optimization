@@ -1,12 +1,13 @@
-import React from "react";
+import { memo } from "react";
+
+import { GenreType } from "../App";
 
 interface IconProps {
-  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
+  name: GenreType;
   color: string;
 }
 
-export function Icon(props: IconProps) {
-
+function IconComponent(props: IconProps) {
   switch (props.name) {
     case 'action':
       return (
@@ -50,3 +51,7 @@ export function Icon(props: IconProps) {
       );
   }
 }
+
+export const Icon = memo(IconComponent, (prevProps, nextProps) => {
+  return Object.is(prevProps, nextProps);
+});
